@@ -70,8 +70,8 @@ const CreateProjectModal = ({ open, onClose }) => {
         {...getFieldProps("name")}
         size="small"
         fullWidth
-        error={errors.name && touched.name}
-        helperText={errors.name}
+        error={Boolean(errors.name) && touched.name}
+        helperText={touched.name && errors.name}
       />
     </Modal>
   );

@@ -1,6 +1,5 @@
 import { Add } from "@mui/icons-material";
 import {
-  Box,
   Button,
   FormHelperText,
   Grid,
@@ -122,7 +121,7 @@ const CreateActivityModal = ({
             onChange={(value) => setFieldValue("startDate", value)}
             slotProps={{
               textField: {
-                error: touched.startDate && errors.startDate,
+                error: touched.startDate && Boolean(errors.startDate),
                 helperText: touched.startDate && errors.startDate,
               },
             }}
@@ -137,7 +136,7 @@ const CreateActivityModal = ({
             onChange={(value) => setFieldValue("endDate", value)}
             slotProps={{
               textField: {
-                error: touched.endDate && errors.endDate,
+                error: touched.endDate && Boolean(errors.endDate),
                 helperText: touched.endDate && errors.endDate,
               },
             }}
@@ -153,7 +152,7 @@ const CreateActivityModal = ({
             onChange={(value) => setFieldValue("startTime", value)}
             slotProps={{
               textField: {
-                error: touched.startTime && errors.startTime,
+                error: touched.startTime && Boolean(errors.startTime),
                 helperText: touched.startTime && errors.startTime,
               },
             }}
@@ -169,7 +168,7 @@ const CreateActivityModal = ({
             onChange={(value) => setFieldValue("endTime", value)}
             slotProps={{
               textField: {
-                error: touched.endTime && errors.endTime,
+                error: touched.endTime && Boolean(errors.endTime),
                 helperText: touched.endTime && errors.endTime,
               },
             }}
@@ -182,7 +181,7 @@ const CreateActivityModal = ({
             {...getFieldProps("title")}
             fullWidth
             size="small"
-            error={touched.title && errors.title}
+            error={touched.title && Boolean(errors.title)}
             helperText={touched.title && errors.title}
           />
         </Grid>
@@ -223,7 +222,7 @@ const CreateActivityModal = ({
               </MenuItem>
             ))}
           </SelectInput>
-          {Boolean(touched.projectId && errors.projectId) && (
+          {touched.projectId && Boolean(errors.projectId) && (
             <FormHelperText error sx={{ m: "4px 14px 0" }}>
               {errors.projectId}
             </FormHelperText>

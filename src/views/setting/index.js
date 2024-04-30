@@ -82,8 +82,8 @@ const SettingView = () => {
               <TextInput
                 {...getFieldProps("name")}
                 size="small"
-                error={Boolean(errors.name) && touched.name}
-                helperText={errors.name}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
               />
             </Stack>
 
@@ -112,8 +112,8 @@ const SettingView = () => {
                 }}
                 customInput={TextInput}
                 type="number"
-                error={Boolean(errors.rate) && touched.rate}
-                helperText={errors.rate}
+                error={touched.rate && Boolean(errors.rate)}
+                helperText={touched.rate && errors.rate}
               />
             </Stack>
 
