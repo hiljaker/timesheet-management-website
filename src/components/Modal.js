@@ -1,6 +1,5 @@
 import { Clear } from "@mui/icons-material";
 import {
-  Box,
   Dialog,
   DialogActions,
   DialogContent,

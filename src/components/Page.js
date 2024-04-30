@@ -30,6 +30,7 @@ const Page = ({ children }) => {
   return (
     <Box>
       <Navbar />
+
       <Box minHeight="100vh" bgcolor="backgroundBrand.main">
         <Box pt={NAVBAR_HEIGHT}>
           <Box

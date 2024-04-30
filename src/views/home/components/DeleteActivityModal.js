@@ -46,7 +46,7 @@ const DeleteActivityModal = ({ open, onClose, activityId = 0 }) => {
         </Stack>
       }
     >
-      <Typography>
+      <Typography typography="body2">
         Apakah anda yakin menghapus <strong>{data?.title}</strong> ?
       </Typography>
     </Modal>

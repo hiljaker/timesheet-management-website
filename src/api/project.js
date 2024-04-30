@@ -17,11 +17,7 @@ const useGetProjects = () => {
 };
 
 const createProject = async (payload = { name: "" }) => {
-  try {
-    await axios.post("/project", payload);
-  } catch (error) {
-    throw error;
-  }
+  await axios.post("/project", payload);
 };
 
 const useCreateProject = () => {

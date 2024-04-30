@@ -39,7 +39,9 @@ const SettingView = () => {
     enableReinitialize: true,
     onSubmit: async (values) => {
       try {
-        const { data } = await axios.post("/employee", values);
+        const { id, ...payload } = values;
+
+        const { data } = await axios.post("/employee", payload);
 
         dispatch(saveSuccess(data.result.employee));
         localStorage.setItem("access-token", data.result.accessToken);

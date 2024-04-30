@@ -12,11 +12,15 @@ import Content from "./sections/Content";
 import CreateActivityModal from "./components/CreateActivityModal";
 import { TextInput } from "@src/components/TextInput";
 import FilterActivityModal from "./components/FilterActivityModal";
+import { useSelector } from "@src/redux/store";
+import Swal from "sweetalert2";
 
 const HomeView = () => {
+  const { employee } = useSelector((state) => state.employee);
   const url = typeof window !== "undefined" && window.location.href;
 
   const { query } = qs.parseUrl(url || "");
+  const { search, projects, ...restOfQueries } = query;
   const { push } = useRouter();
   const searchParams = useSearchParams();
 
@@ -44,10 +48,25 @@ const HomeView = () => {
   const { data: activities, isLoading } = useGetActivities({
     search: searchQuery,
     projects: query.projects,
+    ...restOfQueries,
   });
 
   const [openModal, setOpenModal] = useState(false);
   const [openFilterModal, setOpenFilterModal] = useState(false);
+
+  const handleAddActivityModal = () => {
+    if (Boolean(employee.id)) {
+      setOpenModal(true);
+    } else {
+      Swal.fire({
+        icon: "warning",
+        showConfirmButton: false,
+        title: "Perhatian",
+        text: "Lengkapi profil karyawan terlebih dahulu",
+        timer: 1500,
+      });
+    }
+  };
 
   return (
     <Box
@@ -68,7 +87,7 @@ const HomeView = () => {
               <Typography typography="body1bold" color="neutral300.main">
                 Daftar Kegiatan
               </Typography>
-              <Button variant="text" onClick={() => setOpenModal(true)}>
+              <Button variant="text" onClick={handleAddActivityModal}>
                 <AddCircleOutline sx={{ mr: 1, fontSize: "16px" }} /> Tambah
                 Kegiatan
               </Button>

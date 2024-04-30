@@ -5,38 +5,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 const activitiesKey = "activities";
 const activityKey = "activity";
 
-const fetchActivities = async (
-  searchQuery = {
-    search,
-    projects,
-    title,
-    project,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    duration,
-  }
-) => {
+const fetchActivities = async (searchQuery) => {
   const { data } = await axios.get("/activity", {
     params: searchQuery,
   });
   return data.result.activities;
 };
 
-const useGetActivities = (
-  searchQuery = {
-    search,
-    projects,
-    title,
-    project,
-    startDate,
-    endDate,
-    startTime,
-    endTime,
-    duration,
-  }
-) => {
+const useGetActivities = (searchQuery) => {
   return useQuery({
     queryKey: [activitiesKey, searchQuery],
     queryFn: () => fetchActivities(searchQuery),

@@ -48,6 +48,7 @@ const CreateActivityModal = ({
   editMode = false,
 }) => {
   const { employee } = useSelector((state) => state.employee);
+
   const { data: projects } = useGetProjects();
   const { data: activity } = useGetActivity(activityId || 0);
   const { mutateAsync, data: createActivityResponse } = useCreateActivity();

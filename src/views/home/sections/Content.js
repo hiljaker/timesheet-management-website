@@ -1,4 +1,10 @@
-import { DeleteOutline, DriveFileRenameOutline } from "@mui/icons-material";
+import {
+  DeleteOutline,
+  DriveFileRenameOutline,
+  ExpandLess,
+  ExpandMore,
+  UnfoldMore,
+} from "@mui/icons-material";
 import {
   Stack,
   Table,
@@ -13,13 +19,13 @@ import { format, formatDuration } from "date-fns";
 import React, { useMemo, useState } from "react";
 import CreateActivityModal from "../components/CreateActivityModal";
 import DeleteActivityModal from "../components/DeleteActivityModal";
-import { useRouter } from "next/navigation";
+import queryString from "query-string";
+import navigate from "@src/helpers/navigate";
 
-const Cell = ({ children, head = false, ...props }) => {
+const Cell = ({ children, head = false, sortable, order, ...props }) => {
   return (
     <TableCell
       sx={{
-        typography: head ? "caption1bold" : "caption1",
         borderRight: "1px solid",
         borderBottom: "1px solid",
         borderColor: "neutral700.main",
@@ -29,13 +35,33 @@ const Cell = ({ children, head = false, ...props }) => {
       }}
       {...props}
     >
-      {children}
+      <Stack
+        sx={{ cursor: "pointer" }}
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Typography typography={head ? "caption1bold" : "caption1"}>
+          {children}
+        </Typography>
+
+        {sortable && (
+          <>
+            {order === "asc" && <ExpandLess sx={{ fontSize: "16px" }} />}
+            {order === "desc" && <ExpandMore sx={{ fontSize: "16px" }} />}
+            {!["asc", "desc"].includes(order) && (
+              <UnfoldMore sx={{ fontSize: "16px" }} />
+            )}
+          </>
+        )}
+      </Stack>
     </TableCell>
   );
 };
 
 const Content = ({ activities = [], isLoading = false }) => {
-  const router = useRouter();
+  const url = typeof window !== "undefined" && window.location.href;
+  const { query } = queryString.parseUrl(url || "");
 
   const { employee } = useSelector((state) => state.employee);
 
@@ -80,18 +106,56 @@ const Content = ({ activities = [], isLoading = false }) => {
     setOpenDeleteModal(true);
   };
 
+  const sortedFields = [
+    { title: "Judul Kegiatan", field: "title" },
+    { title: "Proyek", field: "project" },
+    { title: "Tanggal Mulai", field: "startDate" },
+    { title: "Tanggal Berakhir", field: "endDate" },
+    { title: "Waktu Mulai", field: "startTime" },
+    { title: "Waktu Berakhir", field: "endTime" },
+    { title: "Durasi", field: "duration" },
+  ];
+
+  const handleSort = (field = "") => {
+    const searchParams = query;
+
+    const restOfFields = sortedFields.filter(
+      (sortedField) => sortedField.field !== field
+    );
+
+    restOfFields.forEach((restOfField) => {
+      delete searchParams[restOfField.field];
+    });
+
+    if (searchParams[field]) {
+      if (searchParams[field] === "asc") {
+        searchParams[field] = "desc";
+      } else if (searchParams[field] === "desc") {
+        delete searchParams[field];
+      }
+    } else {
+      searchParams[field] = "asc";
+    }
+
+    navigate(`?${queryString.stringify(searchParams)}`);
+  };
+
   return (
     <>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <Cell head>Judul Kegiatan</Cell>
-            <Cell head>Nama Proyek</Cell>
-            <Cell head>Tanggal Mulai</Cell>
-            <Cell head>Tanggal Berakhir</Cell>
-            <Cell head>Waktu Mulai</Cell>
-            <Cell head>Waktu Berakhir</Cell>
-            <Cell head>Durasi</Cell>
+            {sortedFields.map(({ title, field }) => (
+              <Cell
+                key={title}
+                head
+                sortable
+                order={query[field]}
+                onClick={() => handleSort(field)}
+              >
+                {title}
+              </Cell>
+            ))}
             <Cell head>Aksi</Cell>
           </TableRow>
         </TableHead>

@@ -37,7 +37,7 @@ const Header = () => {
             </Typography>
 
             <Typography typography="body2" color="neutral300.main">
-              {employee.name}
+              {employee.name || "-"}
             </Typography>
           </Stack>
 
@@ -47,7 +47,7 @@ const Header = () => {
             </Typography>
 
             <Typography typography="body2" color="neutral300.main">
-              {toRupiah(employee.rate)}/Jam
+              {employee.rate ? `${toRupiah(employee.rate)}/Jam` : "-"}
             </Typography>
           </Stack>
         </>

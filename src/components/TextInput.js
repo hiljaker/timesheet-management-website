@@ -32,7 +32,6 @@ export const TextInput = styled(TextField)(({ theme }) => ({
     backgroundColor: "white",
     ...theme.typography.caption1,
     color: theme.palette.neutral300.main,
-    // borderRadius: "8px",
 
     "&.Mui-focused fieldset": {
       borderColor: theme.palette.blueBrand.main,
