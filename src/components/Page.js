@@ -23,7 +23,6 @@ const Page = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(menus[0].name);
 
   useEffect(() => {
-    push(pathname);
     const selectedTab = menus.find((menu) => menu.url === pathname).name;
     setActiveMenu(selectedTab);
   }, [pathname, push]);
@@ -58,7 +57,7 @@ const Page = ({ children }) => {
                 {menus.map((menu) => (
                   <Tab
                     disableRipple
-                    key={menu.title}
+                    key={menu.name}
                     label={menu.name}
                     value={menu.name}
                     onClick={() => push(menu.url)}

@@ -5,3 +5,7 @@
   margin: 0;
   font-family: "Nunito", sans-serif;
 }
+
+.swal2-container {
+  z-index: 10000;
+}

@@ -32,9 +32,19 @@ export const ButtonOverride = {
     containedPrimary: {
       backgroundColor: colors.blueBrand,
     },
+    containedSecondary: {
+      backgroundColor: colors.redBrand,
+
+      "&:hover": {
+        backgroundColor: `${colors.redBrand}CC`,
+      },
+    },
     textPrimary: {
       color: colors.blueBrand,
       backgroundColor: colors.lightBlueBrand,
+    },
+    textSecondary: {
+      color: colors.redBrand,
     },
     outlinedPrimary: {
       color: colors.blueBrand,

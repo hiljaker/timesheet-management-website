@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialEmployee = {
+  id: 0,
   name: "",
   rate: "",
 };
@@ -17,14 +18,22 @@ const { actions, reducer: employeeReducer } = createSlice({
     saveSuccess: (state, action) => {
       state.employee = {
         ...state.employee,
-        ...{ name: action.payload.name, rate: action.payload.rate },
+        ...{
+          id: action.payload.id,
+          name: action.payload.name,
+          rate: action.payload.rate,
+        },
       };
     },
     tokenValid: (state, action) => {
       state.tokenChecked = true;
       state.employee = {
         ...state.employee,
-        ...{ name: action.payload.name, rate: action.payload.rate },
+        ...{
+          id: action.payload.id,
+          name: action.payload.name,
+          rate: action.payload.rate,
+        },
       };
     },
     tokenInvalid: (state) => {

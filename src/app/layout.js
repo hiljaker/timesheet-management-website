@@ -4,6 +4,7 @@ import Page from "@src/components/Page";
 import TanstackQueryProvider from "@src/components/providers/TanstackQueryProvider";
 import ReduxProvider from "@src/components/providers/ReduxProvider";
 import AuthorizationProvider from "@src/components/providers/AuthorizationProvider";
+import LocalizationProvider from "@src/components/providers/LocalizationProvider";
 
 export const metadata = {
   title: "Timesheet Management",
@@ -12,17 +13,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <MUIThemeProvider>
-      <ReduxProvider>
-        <TanstackQueryProvider>
-          <AuthorizationProvider>
-            <html lang="en">
-              <body>
-                <Page>{children}</Page>
-              </body>
-            </html>
-          </AuthorizationProvider>
-        </TanstackQueryProvider>
-      </ReduxProvider>
+      <LocalizationProvider>
+        <ReduxProvider>
+          <TanstackQueryProvider>
+            <AuthorizationProvider>
+              <html lang="en">
+                <body>
+                  <Page>{children}</Page>
+                </body>
+              </html>
+            </AuthorizationProvider>
+          </TanstackQueryProvider>
+        </ReduxProvider>
+      </LocalizationProvider>
     </MUIThemeProvider>
   );
 }

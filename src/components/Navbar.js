@@ -10,6 +10,7 @@ const Navbar = () => {
         position: "fixed",
         width: "100%",
         bgcolor: "white",
+        zIndex: 99,
       }}
       boxShadow="0px 1px 5px 0px rgba(0,0,0,0.1)"
     >
