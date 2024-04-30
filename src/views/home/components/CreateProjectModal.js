@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import * as Yup from "yup";
 
 const CreateProjectModal = ({ open, onClose }) => {
-  const { mutateAsync, isSuccess, isError, error } = useCreateProject();
+  const { mutateAsync } = useCreateProject();
 
   const { handleSubmit, errors, touched, getFieldProps } = useFormik({
     initialValues: { name: "" },

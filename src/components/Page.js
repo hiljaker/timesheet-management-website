@@ -25,7 +25,7 @@ const Page = ({ children }) => {
   useEffect(() => {
     const selectedTab = menus.find((menu) => menu.url === pathname).name;
     setActiveMenu(selectedTab);
-  }, [pathname, push]);
+  }, [pathname]);
 
   return (
     <Box>

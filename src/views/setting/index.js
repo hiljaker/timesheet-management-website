@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Button, CircularProgress, Stack, Typography } from "@mui/material";
 import { LabelInput, TextInput } from "@src/components/TextInput";
 import { saveSuccess } from "@src/redux/slices/employee";
 import { useDispatch, useSelector } from "@src/redux/store";
@@ -37,6 +31,7 @@ const SettingView = () => {
     isSubmitting,
   } = useFormik({
     initialValues: {
+      id: employee.id || 0,
       name: employee.name || "",
       rate: employee.rate || 0,
     },
@@ -52,7 +47,7 @@ const SettingView = () => {
         Swal.fire({
           icon: "success",
           title: "Berhasil",
-          text: "Berhasil menyimpan profil karyawan",
+          text: data.message || "Berhasil menyimpan profil karyawan",
           showConfirmButton: false,
           timer: 1500,
         });

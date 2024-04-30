@@ -211,6 +211,7 @@ const CreateActivityModal = ({
                 <Typography typography="caption1bold">Tambah Proyek</Typography>
               </Stack>
             </MenuItem>
+
             {projects?.map((project) => (
               <MenuItem
                 key={project.name}

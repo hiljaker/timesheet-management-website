@@ -1,6 +1,5 @@
 import { DeleteOutline, DriveFileRenameOutline } from "@mui/icons-material";
 import {
-  Box,
   Stack,
   Table,
   TableBody,
@@ -8,13 +7,13 @@ import {
   TableHead,
   TableRow,
   Typography,
-  duration,
 } from "@mui/material";
 import { useSelector } from "@src/redux/store";
 import { format, formatDuration } from "date-fns";
 import React, { useMemo, useState } from "react";
 import CreateActivityModal from "../components/CreateActivityModal";
 import DeleteActivityModal from "../components/DeleteActivityModal";
+import { useRouter } from "next/navigation";
 
 const Cell = ({ children, head = false, ...props }) => {
   return (
@@ -36,6 +35,8 @@ const Cell = ({ children, head = false, ...props }) => {
 };
 
 const Content = ({ activities = [], isLoading = false }) => {
+  const router = useRouter();
+
   const { employee } = useSelector((state) => state.employee);
 
   const toRupiah = (amount = 0) => "Rp".concat(amount.toLocaleString("id-ID"));

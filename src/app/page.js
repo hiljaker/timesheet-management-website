@@ -1,8 +1,12 @@
 import HomeView from "@src/views/home";
-import React from "react";
+import React, { Suspense } from "react";
 
 const Home = () => {
-  return <HomeView />;
+  return (
+    <Suspense>
+      <HomeView />
+    </Suspense>
+  );
 };
 
 export default Home;
